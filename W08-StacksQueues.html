@@ -1,0 +1,514 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>CS2001 Week 8: Stacks and Queues</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- html --> 
+<meta name="src" content="W08-StacksQueues.tex"> 
+<link rel="stylesheet" type="text/css" href="W08-StacksQueues.css"> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                                      
+                                                                                      
+                                                                                      
+                                                                                      
+
+<h2 class="titleHead">CS2001 Week 8: Stacks and Queues</h2>
+<div class="author" ><span 
+class="pplr7t-x-x-120">Jon Lewis (jon.lewis@st-andrews.ac.uk)</span></div><br />
+<div class="date" ><span 
+class="pplr7t-x-x-120">Due date: Wednesday 6th November, 21:00</span><br />
+<span 
+class="pplr7t-x-x-120">25% of Practical Mark for the Module</span></div>
+   </div>
+   <h4 class="likesubsectionHead"><a 
+ id="x1-1000"></a>Objective</h4>
+<!--l. 21--><p class="noindent" >To reinforce understanding of stacks and queues.
+<!--l. 23--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-2000"></a>Learning Outcomes</h4>
+<!--l. 25--><p class="noindent" >By the end of this practical you should:
+     <ul class="itemize1">
+     <li class="itemize">be confident in implementing simple ADTs using arrays
+     </li>
+     <li class="itemize">understand the priority queue abstraction</li></ul>
+<!--l. 34--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-3000"></a>Getting started</h4>
+<!--l. 35--><p class="noindent" >To start with, you should create a suitable assignment directory such as <span 
+class="pcrr7t-">CS2001/W08-StacksQueues </span>on the
+Linux lab clients. You should decompress the <span 
+class="pcrr7t-">zip </span>file at
+<div class="center" 
+>
+<!--l. 37--><p class="noindent" >
+<!--l. 38--><p class="noindent" ><a 
+href="https://studres.cs.st-andrews.ac.uk/CS2001/Practicals/W08-StacksQueues/code.zip" class="url" ><span 
+class="pcrr7t-">https://studres.cs.st-andrews.ac.uk/CS2001/Practicals/W08-StacksQueues/code.zip</span></a></div>
+<!--l. 41--><p class="noindent" >to your assignment directory. Please note that the <span 
+class="pcrr7t-">zip </span>file contains a number of files in the <span 
+class="pcrr7t-">src </span>directory, some
+of which are blank or only partially implemented. All your source code should be developed with <span 
+class="pcrr7t-">src </span>as the
+root directory for source code. <span 
+class="pplb7t-">Once you have extracted the </span><span 
+class="pcrb7t-">zip </span><span 
+class="pplb7t-">file, and have completed some of your</span>
+<span 
+class="pplb7t-">own implementation, take care that you don&#8217;t extract the </span><span 
+class="pcrb7t-">zip </span><span 
+class="pplb7t-">file again thereby accidentally</span>
+<span 
+class="pplb7t-">overwriting your </span><span 
+class="pcrb7t-">src </span><span 
+class="pplb7t-">directory (and your own implementation) with files contained in the</span>
+<span 
+class="pcrb7t-">zip</span><span 
+class="pplb7t-">.</span>
+                                                                                      
+                                                                                      
+<!--l. 49--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-4000"></a>Requirements</h4>
+<!--l. 50--><p class="noindent" >The practical is organised into two parts and you can attempt these parts in any order, please find the
+requirements for each sub-part in the sub-sections below. Each part involves implementing a particular ADT as
+outlined below. You are given code in the <span 
+class="pcrr7t-">code.zip </span>file on StudRes as mentioned above. Within the main
+source code directory <span 
+class="pcrr7t-">src</span>, the code is organised into the packages <span 
+class="pcrr7t-">common</span>, <span 
+class="pcrr7t-">impl</span>, <span 
+class="pcrr7t-">interfaces</span>, and <span 
+class="pcrr7t-">test</span>
+(and associated directory structure).
+<!--l. 53--><p class="noindent" >Your job is to develop an implementation of the interfaces in the <span 
+class="pcrr7t-">interfaces </span>package by writing suitable
+classes in the <span 
+class="pcrr7t-">impl </span>package. You should also write tests in the classes provided in the <span 
+class="pcrr7t-">test </span>package.
+Parts of <span 
+class="pcrr7t-">impl.Factory </span>have been implemented, for this class you only need to implement the
+methods containing <span 
+class="pcrr7t-">//</span><span 
+class="pcrr7t-">&#x00A0;TODO </span>comments. You should use the Factory in your test classes as the
+sample test in each test class shows. Should you find some aspects of the interfaces ambiguous, you
+will need to make a decision as to how to implement the interface, which your tests should make
+clear.
+<!--l. 58--><p class="noindent" >As in earlier practicals, please make sure that you do not modify the ADT interfaces or package
+structure.
+<!--l. 63--><p class="noindent" >
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-5000"></a>Part 1: Two Stacks</h5>
+<!--l. 65--><p class="noindent" >Write one or more classes in the <span 
+class="pcrr7t-">impl </span>package to help you provide the functionality of two stacks that share a
+single array object of a specified fixed size to store stack elements. Your double stack class should implement
+the following interface:
+   <!--l. 68-->
+   <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-5001r1"></a></span><span 
+class="pcrb7t-">public</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">interface</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">IDoubleStack</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">{</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5002r2"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">IStack</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">getFirstStack</span><span 
+class="pcrr7t-">();</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5003r3"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">IStack</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">getSecondStack</span><span 
+class="pcrr7t-">();</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5004r4"></a></span><span 
+class="pcrr7t-">}</span>
+   
+   </div>
+<!--l. 75--><p class="noindent" >The stack interface <span 
+class="pcrr7t-">IStack </span>(for each stack contained within an <span 
+class="pcrr7t-">IDoubleStack </span>object) is as defined in lectures
+and shown below. Please also note that the interface included in the <span 
+class="pcrr7t-">code.zip </span>file mentioned above contains
+the Javadoc comments for further explanation.
+   <!--l. 78-->
+   <div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x1-5005r1"></a></span><span 
+class="pcrb7t-">public</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">interface</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">IStack</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">{</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5006r2"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">void</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">push</span><span 
+class="pcrr7t-">(</span><span 
+class="pcrr7t-">Object</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">element</span><span 
+class="pcrr7t-">)</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">throws</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">StackOverflowException</span><span 
+class="pcrr7t-">;</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5007r3"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">Object</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">pop</span><span 
+class="pcrr7t-">()</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">throws</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">StackEmptyException</span><span 
+class="pcrr7t-">;</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5008r4"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">Object</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">top</span><span 
+class="pcrr7t-">()</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">throws</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">StackEmptyException</span><span 
+class="pcrr7t-">;</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5009r5"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">int</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">size</span><span 
+class="pcrr7t-">();</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5010r6"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">boolean</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">isEmpty</span><span 
+class="pcrr7t-">();</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5011r7"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">void</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">clear</span><span 
+class="pcrr7t-">();</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5012r8"></a></span><span 
+class="pcrr7t-">}</span>
+   
+   </div>
+<!--l. 89--><p class="noindent" >Given an <span 
+class="pcrr7t-">IDoubleStack myDoubleStack </span>object with sufficient free space in the shared array, it should be
+possible to e.g. push the values 3 and 7 onto the first and second stacks within the double stack object
+respectively via <!--l. 91-->
+   <div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x1-5013r1"></a></span><span 
+class="pcrr7t-">myDoubleStack</span><span 
+class="pcrr7t-">.</span><span 
+class="pcrr7t-">getFirstStack</span><span 
+class="pcrr7t-">().</span><span 
+class="pcrr7t-">push</span><span 
+class="pcrr7t-">(3);</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-5014r2"></a></span><span 
+class="pcrr7t-">myDoubleStack</span><span 
+class="pcrr7t-">.</span><span 
+class="pcrr7t-">getSecondStack</span><span 
+class="pcrr7t-">().</span><span 
+class="pcrr7t-">push</span><span 
+class="pcrr7t-">(7);</span>
+   
+   </div>
+<!--l. 95--><p class="noindent" >You should similarly be able to invoke <span 
+class="pcrr7t-">pop </span>and the other operations on the individual stack objects in the
+double stack.<br 
+class="newline" />
+<!--l. 98--><p class="noindent" >The two stacks should not conflict with each other, and they should be able to make use of all unused space in
+the single array shared among two stacks within a double stack. If one stack is empty, the other should be able
+to occupy the entire array.
+<!--l. 103--><p class="noindent" >For example, if the underlying array has length 10, then at a given point in time it should be possible for one
+stack to contain 10 elements and the other 0, or for both stacks to contain 5 elements. It should not be possible
+for one to contain 5 elements and the other 6 as these would occupy more space than available in the single,
+shared array of size 10.
+<!--l. 111--><p class="noindent" ><span 
+class="pplb7t-">Hints:</span>
+                                                                                      
+                                                                                      
+     <ul class="itemize1">
+     <li class="itemize">One  way  to  approach  this  would  be  to  store  one  stack  at  the  beginning  of  the  array,  with  the
+     bottom of the stack at position <span 
+class="pcrr7t-">x[0]</span>, and the second stack at the end of the array, with the bottom
+     of that stack at position <span 
+class="pcrr7t-">x[x.length-1]</span>.
+     </li>
+     <li class="itemize">You will also need to write a new class that implements the <span 
+class="pcrr7t-">IStack </span>interface (compared to the
+     example code supplied in Lectures) which is given the underlying shared array, and a flag which
+     indicates which of the two stacks it refers to.</li></ul>
+<!--l. 125--><p class="noindent" >
+   <h5 class="likesubsubsectionHead"><a 
+ id="x1-6000"></a>Part 2: Priority Queue</h5>
+<!--l. 127--><p class="noindent" >A <span 
+class="pplri7t-">Priority Queue </span>is an abstract data type which is like a normal queue, but in which each element has a priority
+associated with it. In a priority queue, an element with higher priority is dequeued prior to an element with
+lower priority, i.e. in <span 
+class="pplri7t-">priority </span>order. However, among elements of equal priority, normal queue semantics
+(FIFO ordering) should be preserved and elements should be dequeued according to their position
+in the queue. Write an array-based implementation of a Priority Queue ADT with the following
+interface:
+   <!--l. 129-->
+   <div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x1-6001r1"></a></span><span 
+class="pcrb7t-">public</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">interface</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">IPriorityQueue</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">{</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6002r2"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">void</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">enqueue</span><span 
+class="pcrr7t-">(</span><span 
+class="pcrr7t-">Comparable</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">element</span><span 
+class="pcrr7t-">)</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">throws</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">QueueFullException</span><span 
+class="pcrr7t-">;</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6003r3"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">Comparable</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">dequeue</span><span 
+class="pcrr7t-">()</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">throws</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">QueueEmptyException</span><span 
+class="pcrr7t-">;</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6004r4"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">int</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">size</span><span 
+class="pcrr7t-">();</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6005r5"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">boolean</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">isEmpty</span><span 
+class="pcrr7t-">();</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6006r6"></a></span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrb7t-">void</span><span 
+class="pcrr7t-">&#x00A0;</span><span 
+class="pcrr7t-">clear</span><span 
+class="pcrr7t-">();</span><span 
+class="pcrr7t-">&#x00A0;</span><br /><span class="label"><a 
+ id="x1-6007r7"></a></span><span 
+class="pcrr7t-">}</span>
+   
+   </div>
+<!--l. 139--><p class="noindent" >The priority of elements should be defined by the total ordering imposed by the <span 
+class="pcrr7t-">compareTo </span>method for
+objects enqueued in your priority queue of <span 
+class="pcrr7t-">Comparable </span>objects. If <span 
+class="pcrr7t-">someObject.compareTo(other)</span>
+returns a positive value, <span 
+class="pcrr7t-">someObject </span>should be treated as having higher priority than the <span 
+class="pcrr7t-">other </span>object.
+Similarly, for a negative return value, <span 
+class="pcrr7t-">someObject </span>should be treated as having lower higher priority than
+the <span 
+class="pcrr7t-">other </span>object. For a return value of zero, <span 
+class="pcrr7t-">someObject </span>should be treated as having the same
+priority as the <span 
+class="pcrr7t-">other </span>object. As we haven&#8217;t formally covered generics yet, you may assume that at
+any point in time, your queue will only ever contain objects of compatible type and warnings
+about using the raw <span 
+class="pcrr7t-">Comparable </span>type can be disregarded. Also, the <span 
+class="pcrr7t-">common </span>package contains a
+<span 
+class="pcrr7t-">PriorityObject </span>class to represent prioritised objects which may help you test some aspects of
+your priority queue implementation more easily than when using integers (see Javadoc in the
+class).
+<!--l. 142--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-7000"></a>Testing</h4>
+<!--l. 143--><p class="noindent" >Write JUnit tests to test your <span 
+class="pcrr7t-">ArrayDoubleStack </span>and <span 
+class="pcrr7t-">ArrayPriorityQueue implementations</span>
+considering normal, edge, and exceptional cases.
+<!--l. 146--><p class="noindent" >Specifically, write JUnit tests for your double stack in the <span 
+class="pcrr7t-">test.ArrayDoubleStackTests </span>class that
+demonstrates that both stacks function correctly, and that their sizes are related in the expected way. Similarly,
+write JUnit tests in the <span 
+class="pcrr7t-">test.ArrayPriorityQueueTests </span>class to demonstrate correct operation of your
+priority queue.
+<!--l. 149--><p class="noindent" >Please make sure that the auto checker can run your tests in the <span 
+class="pcrr7t-">test </span>package prior to submitting.
+<!--l. 153--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-8000"></a>Running the Automated Checker</h4>
+<!--l. 154--><p class="noindent" >Similarly to earlier practicals, you can run the automated checking system on your program by
+opening a terminal window connected to the Linux lab clients/servers and execute the following
+commands:
+                                                                                      
+                                                                                      
+   <div class="verbatim" id="verbatim-1">
+cd&#x00A0;~/CS2001/W08-StacksQueues
+&#x00A0;<br />stacscheck&#x00A0;/cs/studres/CS2001/Practicals/W08-StacksQueues/Tests
+</div>
+<!--l. 159--><p class="nopar" >
+<!--l. 161--><p class="noindent" >assuming <span 
+class="pcrr7t-">CS2001/W08-StacksQueues </span>is your assignment directory. This will run the JUnit
+test classes in the <span 
+class="pcrr7t-">test </span>package on your ADT implementation(s). A test is included in the test
+classes to check that your Factory can create non-null double stack and priority queue objects. The
+final test <span 
+class="pcrr7t-">TestQ CheckStyle </span>runs Checkstyle over your source code using the <span 
+class="pplri7t-">Kirby Style </span>as
+usual.
+<div class="center" 
+>
+<!--l. 164--><p class="noindent" >
+<!--l. 165--><p class="noindent" ><a 
+href="https://info.cs.st-andrews.ac.uk/student-handbook/learning-teaching/programming-style.html" class="url" ><span 
+class="pcrr7t-">https://info.cs.st-andrews.ac.uk/student-handbook/learning-teaching/programming-style.html</span></a></div>
+<!--l. 173--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-9000"></a>Deliverables</h4>
+<!--l. 175--><p class="noindent" >Hand in via MMS, by the deadline of 9pm on Wednesday of Week 8 a <span 
+class="pcrr7t-">zip </span>file containing:
+     <ul class="itemize1">
+     <li class="itemize">Your entire assignment directory with all the source code for your ADT implementations, your
+     tests and any dependencies (i.e. any other files that are needed to compile and run your code).
+     </li>
+     <li class="itemize">A report with an advisory limit of around 1000 words, in PDF format, describing your design,
+     implementation and testing. You might include diagrams to explain how your queue and stack
+     implementations are laid out and operate and refer to and explain these diagrams in your main
+     text. You may also wish to look at the report writing guidelines in the Student Handbook
+     at
+     <div class="center" 
+>
+<!--l. 183--><p class="noindent" >
+<!--l. 184--><p class="noindent" ><a 
+href="https://info.cs.st-andrews.ac.uk/student-handbook/learning-teaching/writing-guidance.html" class="url" ><span 
+class="pcrr7t-">https://info.cs.st-andrews.ac.uk/student-handbook/learning-teaching/writing-guidance.html</span></a></div>
+     </li></ul>
+<!--l. 189--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-10000"></a>Marking Guidance</h4>
+<!--l. 191--><p class="noindent" >The submission will be marked according to the mark descriptors used for CS21001/CS2101, which can be
+found at:
+<div class="center" 
+>
+<!--l. 194--><p class="noindent" >
+<!--l. 195--><p class="noindent" ><a 
+href="https://studres.cs.st-andrews.ac.uk/CS2001/Assessment/descriptors.pdf" class="url" ><span 
+class="pcrr7t-">https://studres.cs.st-andrews.ac.uk/CS2001/Assessment/descriptors.pdf</span></a></div>
+                                                                                      
+                                                                                      
+<!--l. 198--><p class="noindent" >Assuming you have a good set of tests and a good report, you can achieve a mark of up to 11 for producing a
+good solution to either part 1 or part 2 alone and a mark of up to 16 for producing good solutions to both parts
+1 and 2. This means you should produce very good, re-usable code with very good method decomposition and
+provide a very good set of tests with clear explanations and justifications of design and implementation
+decisions in your report. To achieve a mark of 17 or above, you will need to implement all required
+functionality with a comprehensive set of test cases, testing all aspects of your design and covering any cases.
+Quality and clarity of design, implementation, testing, and your report are key at the top end.
+<br 
+class="newline" />
+<!--l. 200--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-11000"></a>Lateness</h4>
+<!--l. 201--><p class="noindent" >The standard penalty for late submission applies (Scheme B: 1 mark per 8 hour period, or part thereof):
+<a 
+href="http://info.cs.st-andrews.ac.uk/student-handbook/learning-teaching/assessment.html#lateness-penalties" class="url" ><span 
+class="pcrr7t-">http://info.cs.st-andrews.ac.uk/student-handbook/learning-teaching/assessment.html#lateness-penalties</span></a>
+<!--l. 205--><p class="noindent" >
+   <h4 class="likesubsectionHead"><a 
+ id="x1-12000"></a>Good Academic Practice</h4>
+<!--l. 207--><p class="noindent" >I would also remind you to ensure you are following the relevant guidelines on good academic practice as
+outlined at
+<div class="center" 
+>
+<!--l. 209--><p class="noindent" >
+<!--l. 210--><p class="noindent" ><a 
+href="https://www.st-andrews.ac.uk/students/rules/academicpractice/" class="url" ><span 
+class="pcrr7t-">https://www.st-andrews.ac.uk/students/rules/academicpractice/</span></a></div>
+    
+</body></html> 
+
+                                                                                      
+
+
