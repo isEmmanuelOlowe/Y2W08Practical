@@ -12,6 +12,9 @@ public class DoubleStack implements IDoubleStack {
   public IStack firstStack;
   public IStack secondStack;
 
+  /**
+  *
+  */
   public DoubleStack(int maxSize) {
     Object[] stackArray = new Object[maxSize];
     AtomicInteger avaliableSpace = new AtomicInteger(maxSize);

@@ -9,10 +9,10 @@ import interfaces.IStack;
 */
 public class Stack implements IStack {
 
-  int maxSize;
-  int currentSize;
-  AtomicInteger avaliableSpace;
-  Object[] stack;
+  private int maxSize;
+  private int currentSize;
+  private AtomicInteger avaliableSpace;
+  private Object[] stack;
 
   /**
   * Creates a new stack object.
@@ -24,6 +24,7 @@ public class Stack implements IStack {
     this.avaliableSpace = avaliableSpace;
     this.stack = stack;
     this.isFront = isFront;
+    this.currentSize = 0;
   }
 
   /**

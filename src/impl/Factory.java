@@ -27,10 +27,14 @@ public final class Factory implements IFactory {
         return factoryInstance;
     }
 
+    /**
+    * Creates a new IDoubleStack object
+    *
+    * @return the object.
+    */
     @Override
     public IDoubleStack makeDoubleStack(int maxSize) {
-        // TODO need to implement this
-        return null;
+        return new DoubleStack(maxSize);
     }
 
     @Override
